@@ -26,8 +26,8 @@ const Success = props => {
           <Box direction="row" gap="small">
             <Validate color="brand"></Validate>
             <Text>
-              Your workshop registration was successful. Please check your email
-              for more details.
+              Your challenge registration was successful. Please check your
+              email for more details.
             </Text>
           </Box>
 
@@ -95,7 +95,7 @@ const Success = props => {
               </Text>
             </Box>
             <Box align="start" justify="start" basis="1/2" direction="row">
-              <Text>{props.location.state.workshop}</Text>
+              <Text>{props.location.state.challenge}</Text>
             </Box>
           </Box>
         </Box>
@@ -103,13 +103,13 @@ const Success = props => {
         <Box direction="row" align="center" justify="center" gap="small">
           <FormClose color="status-critical"></FormClose>
           <Text>
-            Your workshop registration was unsuccessful. Please register again.
+            Your challenge registration was unsuccessful. Please register again.
           </Text>
         </Box>
       )}
       <Box align="center" justify="start" gap="small" pad="medium">
         <Link to="/">
-          <Button label="Register More Workshops" primary={true} />
+          <Button label="Register More Challenges" primary={true} />
         </Link>
       </Box>
     </Box>

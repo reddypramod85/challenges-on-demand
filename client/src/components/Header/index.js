@@ -17,7 +17,7 @@ const AppHeader = () => (
       <Hpe size="large" color="plain" />
       <Box align="center" justify="center" direction="row" gap="xsmall">
         <Text weight="bold">HPE</Text>
-        <Text>Hack Shack Workshops On Demand</Text>
+        <Text>Hack Shack Challenges On Demand</Text>
       </Box>
     </Box>
     <Box align="center" justify="center" direction="row" gap="xsmall">

@@ -8,12 +8,12 @@ dotenv.config();
 
 const router = express.Router();
 
-// end customer workshop trail in process.env.WORKSHOP_DURATION hours
+// end customer challenge trail in process.env.CHALLENGE_DURATION hours
 const getDates = () => {
   const startDate = new Date();
   const endDate = new Date();
   endDate.setHours(
-    parseFloat(endDate.getHours()) + parseFloat(process.env.WORKSHOP_DURATION)
+    parseFloat(endDate.getHours()) + parseFloat(process.env.CHALLENGE_DURATION)
   );
   return { startDate, endDate };
 };
@@ -53,7 +53,7 @@ router.get("/customers", (req, res) => {
 /**
  * @swagger
  * path:
- *  /customer/{customerId}:
+ *  /customers/{customerId}:
  *    get:
  *      summary: Get a customer by ID.
  *      tags: [Customers]
@@ -73,7 +73,7 @@ router.get("/customers", (req, res) => {
  *                $ref: '#/components/schemas/Customer'
  */
 // Get customer by ID
-router.get("/customer/:id", (req, res) => {
+router.get("/customers/:id", (req, res) => {
   models.customer
     .findOne({
       where: { id: req.params.id }
@@ -110,9 +110,9 @@ router.get("/customer/:id", (req, res) => {
  *                $ref: '#/components/schemas/Customer'
  */
 // Create customer
-router.post("/customer/create", async (req, res) => {
+router.post("/customer", async (req, res) => {
   try {
-    // check whether customer is already registered for another workshop
+    // check whether customer is already registered for another challenge
     const count = await models.customer.count({
       where: {
         email: req.body.email
@@ -123,13 +123,13 @@ router.post("/customer/create", async (req, res) => {
       res
         .status(202)
         .send(
-          "You can only register for two workshops at a time, please finish the current workshop and try again!"
+          "You can only register for two challenges at a time, please finish the current challenge and try again!"
         );
       return;
     }
-    // fetch the customer requested workshop from workshops table
-    const workshop = await models.workshop.findOne({
-      where: { name: req.body.workshop }
+    // fetch the customer requested challenge from challenges table
+    const challenge = await models.challenge.findOne({
+      where: { name: req.body.challenge }
     });
 
     // fetch the unassigned student account to assign to the requested customer
@@ -160,9 +160,8 @@ router.post("/customer/create", async (req, res) => {
         });
         await dataValues.update({
           studentId: student.id
-          // workshopId: workshop.id
         });
-        await workshop.decrement("capacity");
+        await challenge.decrement("capacity");
         //await dataValues.save();
         res.status(200).send({});
       }
@@ -177,7 +176,7 @@ router.post("/customer/create", async (req, res) => {
 /**
  * @swagger
  * path:
- *  /customer/edit/{customerId}:
+ *  /customer/{customerId}:
  *    put:
  *      summary: Update a customer by ID.
  *      tags: [Customers]
@@ -203,7 +202,7 @@ router.post("/customer/create", async (req, res) => {
  *                $ref: '#/components/schemas/Customer'
  */
 // Edit customer
-router.put("/customer/edit/:id", (req, res) => {
+router.put("/customer/:id", (req, res) => {
   models.customer
     .findOne({
       where: { id: req.params.id }
@@ -222,7 +221,7 @@ router.put("/customer/edit/:id", (req, res) => {
 /**
  * @swagger
  * path:
- *  /customer/delete/{customerId}:
+ *  /customer/{customerId}:
  *    delete:
  *      summary: Delete a  customer by ID.
  *      tags: [Customers]
@@ -242,7 +241,7 @@ router.put("/customer/edit/:id", (req, res) => {
  *                $ref: '#/components/schemas/Customer'
  */
 // Delete customer
-router.delete("/customer/delete/:id", (req, res) => {
+router.delete("/customer/:id", (req, res) => {
   models.customer
     .findOne({
       where: { id: req.params.id }

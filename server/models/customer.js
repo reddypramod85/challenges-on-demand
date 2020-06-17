@@ -22,25 +22,25 @@
  *          company:
  *            type: string
  *            description: company name of the customer
- *          workshop:
+ *          challenge:
  *            type: string
- *            description: name of workshop registered by the customer
- *          jupyterWorkshop:
+ *            description: name of challenge registered by the customer
+ *          notebook:
  *            type: string
- *            description: name of workshop in jupyterhub registered by the customer
+ *            description: name of challenge in jupyterhub registered by the customer
  *          hours:
  *            type: boolean
  *          startDate:
  *            type: string
  *            format: date-time
- *            description: workshop start date
+ *            description: challenge start date
  *          endDate:
  *            type: string
  *            format: date-time
- *            description: workshop end date
+ *            description: challenge end date
  *          active:
  *            type: boolean
- *            description: customer will be active between the workshop start and end date
+ *            description: customer will be active between the challenge start and end date
  *          lastEmailSent:
  *            type: string
  *            description: lastEmailSent can be welcome | credentials |  expiring | expired
@@ -54,7 +54,7 @@
  *           name: Alexander
  *           email: fake@email.com
  *           company: someCompany
- *           workshop: Grommet
+ *           challenge: Grommet
  *           active: false
  *           lastEmailSent: welcome
  */
@@ -70,9 +70,8 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       company: DataTypes.STRING,
-      //workshopList: DataTypes.ARRAY(DataTypes.STRING),
-      workshop: DataTypes.STRING,
-      jupyterWorkshop: DataTypes.STRING,
+      challenge: DataTypes.STRING,
+      notebook: DataTypes.STRING,
       hours: DataTypes.INTEGER,
       startDate: DataTypes.DATE,
       endDate: DataTypes.DATE,
@@ -97,7 +96,7 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
   // Customer.associate = models => {
-  //   Customer.belongsTo(models.workshop, {
+  //   Customer.belongsTo(models.challenge, {
   //     foreignKey: {
   //       field: "workshopId"
   //       //allowNull: false,

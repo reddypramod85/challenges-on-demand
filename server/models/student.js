@@ -64,13 +64,5 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
 
-  // Student.associate = models => {
-  //   Student.belongsTo(models.customer, {
-  //     foreignKey: {
-  //       field: "customerId",
-  //       allowNull: false
-  //     }
-  //   });
-  // };
   return Student;
 };

@@ -22,7 +22,7 @@ var migrationCommands = [
   {
     fn: "createTable",
     params: [
-      "workshops",
+      "challenges",
       {
         id: {
           type: Sequelize.INTEGER,
@@ -33,7 +33,7 @@ var migrationCommands = [
         name: {
           type: Sequelize.STRING
         },
-        jupyterName: {
+        notebook: {
           type: Sequelize.STRING
         },
         description: {
@@ -93,16 +93,6 @@ var migrationCommands = [
           allowNull: false,
           defaultValue: false
         },
-        // customerId: {
-        //   type: Sequelize.INTEGER,
-        //   onUpdate: "NO ACTION",
-        //   onDelete: "NO ACTION",
-        //   references: {
-        //     model: "customers",
-        //     key: "id"
-        //   },
-        //   allowNull: false
-        // },
         createdAt: {
           type: Sequelize.DATE
         },
@@ -127,9 +117,8 @@ var migrationCommands = [
         name: Sequelize.STRING,
         email: Sequelize.STRING,
         company: Sequelize.STRING,
-        //workshopList: Sequelize.ARRAY(Sequelize.STRING),
-        workshop: Sequelize.STRING,
-        jupyterWorkshop: {
+        challenge: Sequelize.STRING,
+        notebook: {
           type: Sequelize.STRING
         },
         hours: Sequelize.INTEGER,

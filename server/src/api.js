@@ -6,9 +6,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import compression from "compression";
 import morgan from "morgan";
-import workshopRoutes from "../routes/workshops";
 import customerRoutes from "../routes/customers";
 import studentRoutes from "../routes/students";
+import challengeRoutes from "../routes/challenges";
 import runCronJobs from "../modules/CheckCustomers";
 
 dotenv.config();
@@ -78,7 +78,7 @@ app.get("/swagger.json", function(req, res) {
 
 router.get("/", (req, res) => {
   res.json({
-    hello: "hi"
+    hello: "HackShack Challenge"
   });
 });
 
@@ -89,14 +89,14 @@ router.get("/test", (req, res) => {
 });
 
 // Model routes
-app.use("/api", workshopRoutes);
 app.use("/api", studentRoutes);
 app.use("/api", customerRoutes);
+app.use("/api", challengeRoutes);
 
 app.use(express.json());
 app.use("", router);
 app.listen(3002, () => {
-  console.log("HPE Workshops On Demand API listening on port 3002!"); // eslint-disable-line no-console
+  console.log("HPE HackShack Challenges API listening on port 3002!"); // eslint-disable-line no-console
   runCronJobs();
 });
 

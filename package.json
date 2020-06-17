@@ -1,5 +1,5 @@
 {
-  "name": "workshops-on-demand",
+  "name": "challenges-on-demand",
   "version": "1.0.0",
   "description": "HPEDEV Hack Shack Workshops On Demand",
   "main": "index.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reddypramod85/workshops-on-demand.git"
+    "url": "git+https://github.com/reddypramod85/challenges-on-demand.git"
   },
   "keywords": [],
   "author": "Pramod Sareddy",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/reddypramod85/workshops-on-demand/issues"
+    "url": "https://github.com/reddypramod85/challenges-on-demand/issues"
   },
-  "homepage": "https://github.com/reddypramod85/workshops-on-demand#readme",
+  "homepage": "https://github.com/reddypramod85/challenges-on-demand#readme",
   "devDependencies": {
     "concurrently": "^5.1.0"
   }

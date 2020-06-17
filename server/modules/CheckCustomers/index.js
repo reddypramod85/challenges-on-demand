@@ -21,26 +21,10 @@ const getDates = () => {
   const startDate = new Date();
   const endDate = new Date();
   endDate.setHours(
-    parseFloat(endDate.getHours()) + parseFloat(process.env.WORKSHOP_DURATION)
+    parseFloat(endDate.getHours()) + parseFloat(process.env.CHALLENGE_DURATION)
   );
   return { startDate, endDate };
 };
-
-/* Function to generate combination of password */
-
-// const generatePassword = () => {
-//   var pass = "";
-//   var str =
-//     "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz0123456789@#$";
-
-//   for (let i = 1; i <= 8; i++) {
-//     var char = Math.floor(Math.random() * str.length + 1);
-
-//     pass += str.charAt(char);
-//   }
-
-//   return pass;
-// };
 
 export const monthNames = [
   "January",
@@ -73,14 +57,14 @@ const checkCustomer = () => {
           console.log("send welcome email");
           return sendEmail({
             recipient: dataValues.email,
-            subject: "Welcome to HPE Workshops On Demand",
+            subject: "Welcome to HPE Discover HackShack Challenge",
             content: createEmailBody({
-              heading: "Welcome to HPE Workshops On Demand!",
+              heading: "Welcome to HPE Discover HackShack Challenge!",
               content: `
                 Hi ${dataValues.name},</br>
-                Your request for the <b>${dataValues.workshop}</b> workshop has been received. We will send you the access details shortly in a seperate email.</br>
-                <b>NOTE:</b> Your wokshop access will be expired in ${dataValues.hours} hours after you receive your credentials.</br>
-                Please save your workshop work before your loose the access</br>
+                Your request for the <b>${dataValues.challenge}</b> challenge has been received. We will send you the access details shortly in a seperate email.</br>
+                <b>NOTE:</b> Your challenge access will be expired in ${dataValues.hours} hours after you receive your credentials.</br>
+                Please save your challenge work before your loose the access</br>
                 </br></br>
               `
             })
@@ -91,7 +75,7 @@ const checkCustomer = () => {
               });
             })
             .then(() => {
-              var mailContent = `${dataValues.jupyterWorkshop}`;
+              var mailContent = `${dataValues.notebook}`;
               sendEmail({
                 recipient: jupyterEmail,
                 subject: `CREATE ${dataValues.studentId} ${dataValues.id} ${dataValues.email}`,
@@ -103,24 +87,24 @@ const checkCustomer = () => {
             });
         }
 
-        // Send workshop credentilas as soon as there are ready.
+        // Send challenge credentilas as soon as there are ready.
         if (customerStatus && dataValues.lastEmailSent === "welcome") {
-          // fetch the customer requested workshop from workshops table
-          const workshop = await models.workshop.findOne({
-            where: { name: dataValues.workshop }
+          // fetch the customer requested challenge from challenges table
+          const challenge = await models.challenge.findOne({
+            where: { name: dataValues.challenge }
           });
-          console.log("send workshops credentials email");
+          console.log("send challenges credentials email");
           return sendEmail({
             recipient: dataValues.email,
-            subject: "Your HPE Workshops On Demand credentials",
+            subject: "Your HPE Discover HackShack Challenge credentials",
             content: createEmailBody({
-              heading: "Your HPE Workshops On Demand credentials",
-              content: `Your <b>${dataValues.workshop}</b> workshop credentials along with the video link are provided below to follow along the workshop. Your access to the workshop will end in ${dataValues.hours} hours from now.`,
-              buttonLabel: "Start Workshop",
+              heading: "Your HPE Discover HackShack Challenge credentials",
+              content: `Your <b>${dataValues.challenge}</b> challenge credentials along with the video link are provided below to follow along the challenge. Your access to the challenge will end in ${dataValues.hours} hours from now.`,
+              buttonLabel: "Start Challenge",
               buttonUrl: dataValues.student.url,
               userName: dataValues.student.username,
               password: dataValues.student.password,
-              videoUrl: `${workshop.replayAvailable}` ? workshop.videoUrl : ""
+              videoUrl: `${challenge.replayAvailable}` ? challenge.videoUrl : ""
             })
           })
             .then(() => {
@@ -136,22 +120,23 @@ const checkCustomer = () => {
 
         // Send expiring soon email.
         if (hoursLeft <= 1 && dataValues.lastEmailSent === "credentials") {
-          // fetch the customer requested workshop from workshops table
-          const workshop = await models.workshop.findOne({
-            where: { name: dataValues.workshop }
+          // fetch the customer requested challenge from challenges table
+          const challenge = await models.challenge.findOne({
+            where: { name: dataValues.challenge }
           });
           return sendEmail({
             recipient: dataValues.email,
-            subject: "Your HPE Workshops On Demand session will end in an hour",
+            subject:
+              "Your HPE Discover HackShack Challenge session will end in an hour",
             content: createEmailBody({
               heading:
-                "Your HPE Workshops On Demand session will end in an hour",
-              content: `Your workshop session will end in an hour. Please save your work and download the workshop notebook if required in future. Your account will be erased after your session is ended`,
-              buttonLabel: "View Workshop",
+                "Your HPE Discover HackShack Challenge session will end in an hour",
+              content: `Your challenge session will end in an hour. Please save your work and download the challenge notebook if required in future. Your account will be erased after your session is ended`,
+              buttonLabel: "View Challenge",
               buttonUrl: dataValues.student.url,
               userName: dataValues.student.username,
               password: dataValues.student.password,
-              videoUrl: `${workshop.replayAvailable}` ? workshop.videoUrl : ""
+              videoUrl: `${challenge.replayAvailable}` ? challenge.videoUrl : ""
             })
           })
             .then(() => {
@@ -169,10 +154,10 @@ const checkCustomer = () => {
           console.log("send expired email");
           return sendEmail({
             recipient: dataValues.email,
-            subject: "Your HPE Workshops On Demand session has ended",
+            subject: "Your HPE Discover HackShack Challenge session has ended",
             content: createEmailBody({
-              heading: "Thanks for trying HPE Workshops On Demand!",
-              content: `We hope you enjoyed <b>${dataValues.workshop}<b> Workshop.`,
+              heading: "Thanks for trying HPE Discover HackShack Challenge!",
+              content: `We hope you enjoyed <b>${dataValues.challenge}<b> Challenge.`,
               buttonLabel: "Click here to Provide the Feedback",
               buttonUrl: feedback_url
             })
@@ -194,16 +179,11 @@ const checkCustomer = () => {
               .catch(() => {
                 console.log("Promise Rejected");
               });
-            // change password
-            // customer.student.update({
-            //   assigned: false,
-            //   password: generatePassword()
-            // });
-            // fetch the customer requested workshop from workshops table
-            const workshop = await models.workshop.findOne({
-              where: { name: dataValues.workshop }
+            // fetch the customer requested challenge from challenges table
+            const challenge = await models.challenge.findOne({
+              where: { name: dataValues.challenge }
             });
-            await workshop.increment("capacity");
+            await challenge.increment("capacity");
           });
         }
         return;

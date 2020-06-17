@@ -7,7 +7,7 @@ const router = express.Router();
  * @swagger
  * tags:
  *   name: Students
- *   description: Jupyterhub Student management
+ *   description: Student management
  */
 
 // Create a Student
@@ -69,7 +69,7 @@ router.get("/students", (req, res) => {
 /**
  * @swagger
  * path:
- *  /student/{studentId}:
+ *  /students/{studentId}:
  *    get:
  *      summary: Get a student by ID.
  *      tags: [Students]
@@ -89,7 +89,7 @@ router.get("/students", (req, res) => {
  *                $ref: '#/components/schemas/Student'
  */
 // Get student by ID
-router.get("/student/:id", (req, res) => {
+router.get("/students/:id", (req, res) => {
   models.student
     .findOne({
       where: { id: req.params.id }
@@ -106,7 +106,7 @@ router.get("/student/:id", (req, res) => {
 /**
  * @swagger
  * path:
- *  /student/edit/{studentId}:
+ *  /student/{studentId}:
  *    put:
  *      summary: Update a student by ID.
  *      tags: [Students]
@@ -132,7 +132,7 @@ router.get("/student/:id", (req, res) => {
  *                $ref: '#/components/schemas/Student'
  */
 // Edit student
-router.put("/student/edit/:id", (req, res) => {
+router.put("/student/:id", (req, res) => {
   models.student
     .findOne({
       where: { id: req.params.id }
@@ -150,9 +150,9 @@ router.put("/student/edit/:id", (req, res) => {
 /**
  * @swagger
  * path:
- *  /student/delete/{studentId}:
+ *  /student/{studentId}:
  *    delete:
- *      summary: Delete a jupyterhub student by ID.
+ *      summary: Delete a student by ID.
  *      tags: [Students]
  *      parameters:
  *        - in: path
@@ -171,7 +171,7 @@ router.put("/student/edit/:id", (req, res) => {
  */
 
 // Delete student
-router.delete("/student/delete/:id", (req, res) => {
+router.delete("/student/:id", (req, res) => {
   models.student
     .findOne({
       where: { id: req.params.id }

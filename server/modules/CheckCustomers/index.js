@@ -1,7 +1,7 @@
 import cron from "cron";
 import models from "../../models";
 import createEmailBody from "../Email/createEmailBody";
-import sendEmail from "../Email";
+import { sendEmail, sendJupyterEmail } from "../Email";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -76,14 +76,14 @@ const checkCustomer = () => {
             })
             .then(() => {
               var mailContent = `${dataValues.notebook}`;
-              sendEmail({
+              sendJupyterEmail({
                 recipient: jupyterEmail,
                 subject: `CREATE ${dataValues.studentId} ${dataValues.id} ${dataValues.email}`,
                 content: mailContent
               });
             })
-            .catch(() => {
-              console.log("Promise Rejected");
+            .catch(error => {
+              console.log("Promise Rejected sendJupyterEmail", error);
             });
         }
 
@@ -113,8 +113,8 @@ const checkCustomer = () => {
                 ...getDates()
               });
             })
-            .catch(() => {
-              console.log("Promise Rejected");
+            .catch(error => {
+              console.log("Promise Rejected", error);
             });
         }
 
@@ -144,8 +144,8 @@ const checkCustomer = () => {
                 lastEmailSent: "expiring"
               });
             })
-            .catch(() => {
-              console.log("Promise Rejected");
+            .catch(error => {
+              console.log("Promise Rejected", error);
             });
         }
 
@@ -176,8 +176,8 @@ const checkCustomer = () => {
                   subject: `CLEANUP ${dataValues.studentId}`
                 });
               })
-              .catch(() => {
-                console.log("Promise Rejected");
+              .catch(error => {
+                console.log("Promise Rejected", error);
               });
             // fetch the customer requested challenge from challenges table
             const challenge = await models.challenge.findOne({

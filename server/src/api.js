@@ -10,6 +10,7 @@ import customerRoutes from "../routes/customers";
 import studentRoutes from "../routes/students";
 import challengeRoutes from "../routes/challenges";
 import runCronJobs from "../modules/CheckCustomers";
+const nodemailer = require("nodemailer");
 
 dotenv.config();
 
@@ -30,6 +31,40 @@ app.use(
   })
 );
 app.use(bodyParser.json({ limit: "20mb" }));
+
+router.post("/send", (req, res) => {
+  console.log("inside send");
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    // port: 10125,
+    port: 587,
+    secure: false,
+    // requireTLS: true,
+    auth: {
+      user: process.env.GMAIL_USERNAME,
+      pass: process.env.GMAIL_PASSWORD
+    }
+  });
+
+  // setup email data with unicode symbols
+  let mailOptions = {
+    from: "pramod-reddy.sareddy@hpe.com", // sender address
+    to: "reddypramod85@gmail.com", // list of receivers
+    subject: "A Postcard For You!", // Subject line
+    text: "Postcard", // plain text body
+    html: "<b>From my app</b>" // html body
+  };
+
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log("Message sent: %s", info.messageId);
+    res.send("email sent");
+  });
+});
 
 // Swagger set up
 const options = {
@@ -77,6 +112,7 @@ app.get("/swagger.json", function(req, res) {
 });
 
 router.get("/", (req, res) => {
+  console.log("inside base route");
   res.json({
     hello: "HackShack Challenge"
   });

@@ -99,7 +99,7 @@ const checkCustomer = () => {
             subject: "Your HPE Discover HackShack Challenge credentials",
             content: createEmailBody({
               heading: "Your HPE Discover HackShack Challenge credentials",
-              content: `Your <b>${dataValues.challenge}</b> challenge credentials along with the video link are provided below to follow along the challenge. Your access to the challenge will end in ${dataValues.hours} hours from now.`,
+              content: `Your <b>${dataValues.challenge}</b> credentials along with the video link are provided below to follow along the challenge. Your access to the challenge will end in ${dataValues.hours} hours from now.`,
               buttonLabel: "Start Challenge",
               buttonUrl: dataValues.student.url,
               userName: dataValues.student.username,

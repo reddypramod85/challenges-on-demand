@@ -1,7 +1,8 @@
 module.exports = {
   up: queryInterface => {
-    const N = 5;
-    const arr = [...Array(N + 1).keys()].slice(1);
+    // const N = 5;
+    // const arr = [...Array(N + 1).keys()].slice(1);
+    const arr = [441, 442, 443, 444, 445];
     const entries = arr.map(key => ({
       createdAt: new Date(),
       updatedAt: new Date(),

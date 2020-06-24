@@ -16,6 +16,7 @@ dotenv.config();
 
 const fromEmailAddress = process.env.FROM_EMAIL_ADDRESS;
 const prodApiUrl = process.env.PRODUCTION_API_SERVER;
+const apiPort = process.env.API_PORT;
 
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
@@ -31,40 +32,6 @@ app.use(
   })
 );
 app.use(bodyParser.json({ limit: "20mb" }));
-
-router.post("/send", (req, res) => {
-  console.log("inside send");
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    // port: 10125,
-    port: 587,
-    secure: false,
-    // requireTLS: true,
-    auth: {
-      user: process.env.GMAIL_USERNAME,
-      pass: process.env.GMAIL_PASSWORD
-    }
-  });
-
-  // setup email data with unicode symbols
-  let mailOptions = {
-    from: "pramod-reddy.sareddy@hpe.com", // sender address
-    to: "reddypramod85@gmail.com", // list of receivers
-    subject: "A Postcard For You!", // Subject line
-    text: "Postcard", // plain text body
-    html: "<b>From my app</b>" // html body
-  };
-
-  // send mail with defined transport object
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error);
-    }
-    console.log("Message sent: %s", info.messageId);
-    res.send("email sent");
-  });
-});
 
 // Swagger set up
 const options = {
@@ -86,7 +53,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3002/api",
+        url: `http://localhost:${apiPort}}/api`,
         description: "Local (development) server"
       },
       {
@@ -131,8 +98,8 @@ app.use("/api", challengeRoutes);
 
 app.use(express.json());
 app.use("", router);
-app.listen(3002, () => {
-  console.log("HPE HackShack Challenges API listening on port 3002!"); // eslint-disable-line no-console
+app.listen(apiPort, () => {
+  console.log(`HPE HackShack Challenges API listening on port ${apiPort}!`); // eslint-disable-line no-console
   runCronJobs();
 });
 

@@ -119,11 +119,11 @@ router.post("/customer", async (req, res) => {
       }
     });
     console.log("count", count);
-    if (count >= 2) {
+    if (count >= 1) {
       res
         .status(202)
         .send(
-          "You can only register for two challenges at a time, please finish the current challenge and try again!"
+          "You can only register for one challenge at a time, please finish the current challenge and try again!"
         );
       return;
     }

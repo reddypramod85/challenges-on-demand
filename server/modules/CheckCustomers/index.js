@@ -54,36 +54,37 @@ const checkCustomer = () => {
 
         // Send welcome email.
         if (!dataValues.lastEmailSent && dataValues.studentId != null) {
-          console.log("send welcome email");
-          return sendEmail({
-            recipient: dataValues.email,
-            subject: "Welcome to HPE Discover HackShack Challenge",
-            content: createEmailBody({
-              heading: "Welcome to HPE Discover HackShack Challenge!",
-              content: `
-                Hi ${dataValues.name},</br>
-                Your request for the <b>${dataValues.challenge}</b> challenge has been received. We will send you the access details shortly in a seperate email.</br>
-                <b>NOTE:</b> Your challenge access will be expired in ${dataValues.hours} hours after you receive your credentials.</br>
-                Please save your challenge work before your loose the access</br>
-                </br></br>
-              `
-            })
+          console.log("send jupyter email");
+          var mailContent = `${dataValues.notebook}`;
+          return sendJupyterEmail({
+            recipient: jupyterEmail,
+            subject: `CREATE ${dataValues.studentId} ${dataValues.id} ${dataValues.email}`,
+            content: mailContent
           })
+            .then(() => {
+              console.log("send welcome email");
+              sendEmail({
+                recipient: dataValues.email,
+                subject: "Welcome to HPE Discover HackShack Challenge",
+                content: createEmailBody({
+                  heading: "Welcome to HPE Discover HackShack Challenge!",
+                  content: `
+  Hi ${dataValues.name},</br>
+  Your request for the <b>${dataValues.challenge}</b> challenge has been received. We will send you the access details shortly in a seperate email.</br>
+  <b>NOTE:</b> Your challenge access will be expired in ${dataValues.hours} hours after you receive your credentials.</br>
+  Please save your challenge work before your loose the access</br>
+  </br></br>
+  `
+                })
+              });
+            })
             .then(() => {
               customer.update({
                 lastEmailSent: "welcome"
               });
             })
-            .then(() => {
-              var mailContent = `${dataValues.notebook}`;
-              sendJupyterEmail({
-                recipient: jupyterEmail,
-                subject: `CREATE ${dataValues.studentId} ${dataValues.id} ${dataValues.email}`,
-                content: mailContent
-              });
-            })
             .catch(error => {
-              console.log("Promise Rejected sendJupyterEmail", error);
+              console.log("Promise Rejected", error);
             });
         }
 
@@ -157,7 +158,7 @@ const checkCustomer = () => {
             subject: "Your HPE Discover HackShack Challenge session has ended",
             content: createEmailBody({
               heading: "Thanks for trying HPE Discover HackShack Challenge!",
-              content: `We hope you enjoyed <b>${dataValues.challenge}<b> Challenge.`,
+              content: `We hope you enjoyed <b>${dataValues.challenge}<b>.`,
               buttonLabel: "Click here to Provide the Feedback",
               buttonUrl: feedback_url
             })
@@ -173,7 +174,7 @@ const checkCustomer = () => {
               .then(() => {
                 sendJupyterEmail({
                   recipient: jupyterEmail,
-                  subject: `CLEANUP ${dataValues.studentId}`
+                  subject: `CLEANUP ${dataValues.studentId} ${dataValues.id}`
                 });
               })
               .catch(error => {

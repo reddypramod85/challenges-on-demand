@@ -8,46 +8,32 @@ const HOST = process.env.JUPYTER_HOST;
 const PORT = process.env.JUPYTER_PORT;
 
 const sendJupyterEmail = ({ recipient, subject, content }) => {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const client = new net.Socket();
+    client.setTimeout(2000);
     const msg = `MAIL FROM: ${fromAddress} \nRCPT TO: ${recipient} \nDATA\nSubject: ${subject} \n${content}\n.\n`;
-    client.connect(PORT, HOST, function() {
-      console.log("CONNECTED TO: " + HOST + ":" + PORT);
-      console.log("message", msg);
-      // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
-      client.write(msg);
-    });
-
-    client.on("error", function(error) {
-      console.log("ERROR" + error.message);
-      if (error.code == "ENOTFOUND") {
-        console.log("[ERROR] No device found at this address!");
+    client
+      .connect(PORT, HOST, function() {
+        console.log("CONNECTED TO: " + HOST + ":" + PORT);
+        console.log("message", msg);
+        // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
+        client.write(msg);
+      })
+      .on("error", function(error) {
+        console.log("ERROR" + error.message);
         client.destroy();
         return reject(error);
-      }
-
-      if (error.code == "ECONNREFUSED") {
-        console.log("[ERROR] Connection refused! Please check the IP.");
+      })
+      .on("data", function(data) {
+        console.log("DATA: " + data);
+        // Close the client socket completely
         client.destroy();
-        return reject(error);
-      }
-    });
-
-    // Add a 'data' event handler for the client socket
-    // data is what the server sent to this socket
-    client.on("data", function(data) {
-      console.log("DATA: " + data);
-      // Close the client socket completely
-      client.destroy();
-      return resolve(recipient);
-    });
-
-    // Add a 'close' event handler for the client socket
-    client.on("close", function() {
-      console.log("Connection closed");
-      return resolve(recipient);
-    });
-    return resolve(recipient);
+        return resolve(recipient);
+      })
+      .on("close", function() {
+        console.log("Connection closed");
+        return resolve(recipient);
+      });
   });
 };
 

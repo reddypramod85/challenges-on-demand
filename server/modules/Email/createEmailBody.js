@@ -21,7 +21,7 @@ module.exports = ({
     <div style="padding: 12px 0;">
       <img src="https://us-central1-grommet-designer.cloudfunctions.net/images/lozzi-hpe-com/developer-logo.png" style="display: inline-block; vertical-align: top;">
       <span style="display: inline-block; margin: 12px; font-size: 20px; font-weight: 700;">
-        HPE Workshops On Demand
+        HPE Discover Hack Shack Challenge
       </span>
     </div>
   </div>
@@ -36,7 +36,7 @@ module.exports = ({
     ${
       userName && password
         ? `<p style="font-size: 20px; max-width: 720px; margin: 0 auto;">
-    Use below credentials to start the workshop
+    Use below credentials to start the challenge
   </p><br>`
         : ""
     }

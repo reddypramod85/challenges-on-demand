@@ -166,10 +166,7 @@ const checkCustomer = () => {
             customer
               .update({
                 lastEmailSent: "expired",
-                active: false,
-                email: "",
-                name: "",
-                company: ""
+                active: false
               })
               .then(() => {
                 sendJupyterEmail({

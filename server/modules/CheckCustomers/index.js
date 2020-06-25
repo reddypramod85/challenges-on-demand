@@ -171,7 +171,7 @@ const checkCustomer = () => {
                 company: ""
               })
               .then(() => {
-                sendEmail({
+                sendJupyterEmail({
                   recipient: jupyterEmail,
                   subject: `CLEANUP ${dataValues.studentId}`
                 });

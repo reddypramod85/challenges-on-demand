@@ -26,30 +26,13 @@ const getDates = () => {
   return { startDate, endDate };
 };
 
-export const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
-
 const checkCustomer = () => {
   models.customer
     .findAll({ include: [{ all: true, nested: true }] })
     .then(customers =>
       customers.map(async customer => {
-        // eslint-disable-line array-callback-return
         const { dataValues } = customer;
         const customerStatus = dataValues.active;
-        //const updated = dataValues.upupdatedAt.getHours();
         const hoursLeft = getHoursLeft(dataValues.endDate);
 
         // Send welcome email.
@@ -65,12 +48,12 @@ const checkCustomer = () => {
               console.log("send welcome email");
               sendEmail({
                 recipient: dataValues.email,
-                subject: "Welcome to HPE Discover HackShack Challenge",
+                subject: "Welcome to the HPE Discover HackShack Challenge",
                 content: createEmailBody({
-                  heading: "Welcome to HPE Discover HackShack Challenge!",
+                  heading: "Welcome to the HPE Discover HackShack Challenge!",
                   content: `
   Hi ${dataValues.name},</br>
-  Your request for the <b>${dataValues.challenge}</b> challenge has been received. We will send you the access details shortly in a seperate email.</br>
+  Your request for the <b>${dataValues.challenge}</b> has been received. We will send you the access details shortly in a seperate email.</br>
   <b>NOTE:</b> Your challenge access will be expired in ${dataValues.hours} hours after you receive your credentials.</br>
   Please save your challenge work before your loose the access</br>
   </br></br>
@@ -91,21 +74,22 @@ const checkCustomer = () => {
         // Send challenge credentilas as soon as there are ready.
         if (customerStatus && dataValues.lastEmailSent === "welcome") {
           // fetch the customer requested challenge from challenges table
-          const challenge = await models.challenge.findOne({
-            where: { name: dataValues.challenge }
-          });
+          // const challenge = await models.challenge.findOne({
+          //   where: { name: dataValues.challenge }
+          // });
           console.log("send challenges credentials email");
           return sendEmail({
             recipient: dataValues.email,
             subject: "Your HPE Discover HackShack Challenge credentials",
             content: createEmailBody({
               heading: "Your HPE Discover HackShack Challenge credentials",
-              content: `Your <b>${dataValues.challenge}</b> credentials along with the video link are provided below to follow along the challenge. Your access to the challenge will end in ${dataValues.hours} hours from now.`,
+              content: `Your <b>${dataValues.challenge}</b> credentials are provided below. Your access to the challenge will end in ${dataValues.hours} hours from now.</br> 
+              <b>NOTE:</b> You may need to click on the Launch Server button once you login to your Jupyter student account</br>`,
               buttonLabel: "Start Challenge",
               buttonUrl: dataValues.student.url,
               userName: dataValues.student.username,
-              password: dataValues.student.password,
-              videoUrl: `${challenge.replayAvailable}` ? challenge.videoUrl : ""
+              password: dataValues.student.password
+              // videoUrl: `${challenge.replayAvailable}` ? challenge.videoUrl : ""
             })
           })
             .then(() => {
@@ -122,9 +106,9 @@ const checkCustomer = () => {
         // Send expiring soon email.
         if (hoursLeft <= 1 && dataValues.lastEmailSent === "credentials") {
           // fetch the customer requested challenge from challenges table
-          const challenge = await models.challenge.findOne({
-            where: { name: dataValues.challenge }
-          });
+          // const challenge = await models.challenge.findOne({
+          //   where: { name: dataValues.challenge }
+          // });
           return sendEmail({
             recipient: dataValues.email,
             subject:
@@ -136,8 +120,8 @@ const checkCustomer = () => {
               buttonLabel: "View Challenge",
               buttonUrl: dataValues.student.url,
               userName: dataValues.student.username,
-              password: dataValues.student.password,
-              videoUrl: `${challenge.replayAvailable}` ? challenge.videoUrl : ""
+              password: dataValues.student.password
+              // videoUrl: `${challenge.replayAvailable}` ? challenge.videoUrl : ""
             })
           })
             .then(() => {

@@ -12,8 +12,6 @@ module.exports = {
         preRequisite: "WKSHP-RedfishOverview, WKSHP-API101, WKSHP-GIT101",
         replayAvailable: true,
         active: false,
-        videoUrl:
-          "https://hpe.sharepoint.com/teams/HPE_TSS_2020/Presentations%20%20Recordings/Forms/AllItems.aspx?id=%2Fteams%2FHPE%5FTSS%5F2020%2FPresentations%20%20Recordings%2FSoftware%20Defined%20%26%20Cloud%2FHACK%5FSHACK%5FHS5%2DRedFish%20API101%2Emp4&parent=%2Fteams%2FHPE%5FTSS%5F2020%2FPresentations%20%20Recordings%2FSoftware%20Defined%20%26%20Cloud",
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -26,8 +24,6 @@ module.exports = {
         preRequisite: "WKSHP-HPECP-API, WKSHP-API101, WKSHP-GIT101",
         replayAvailable: true,
         active: false,
-        videoUrl:
-          " https://hpe.sharepoint.com/teams/HPE_TSS_2020/Presentations%20%20Recordings/Forms/AllItems.aspx?id=%2Fteams%2FHPE%5FTSS%5F2020%2FPresentations%20%20Recordings%2FSoftware%20Defined%20%26%20Cloud%2FHACK%5FSHACK%5FHS4%2DLearn%20about%20fundamentals%20of%20HPE%20SimpliVity%20REST%20API%20and%20improve%20your%20agility%20in%20managing%20an%20HCI%20DC%2Emp4&parent=%2Fteams%2FHPE%5FTSS%5F2020%2FPresentations%20%20Recordings%2FSoftware%20Defined%20%26%20Cloud",
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -40,8 +36,6 @@ module.exports = {
         preRequisite: "WKSHP-OneView, WKSHP-API101, WKSHP-GIT101",
         replayAvailable: true,
         active: false,
-        videoUrl:
-          " https://hpe.sharepoint.com/teams/HPE_TSS_2020/Presentations%20%20Recordings/Forms/AllItems.aspx?id=%2Fteams%2FHPE%5FTSS%5F2020%2FPresentations%20%20Recordings%2FSoftware%20Defined%20%26%20Cloud%2FHACK%5FSHACK%5FHS6%2DDive%20into%20infrastructure%20automation%20with%20the%20HPE%20OneView%20API%2Emp4&parent=%2Fteams%2FHPE%5FTSS%5F2020%2FPresentations%20%20Recordings%2FSoftware%20Defined%20%26%20Cloud",
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -55,14 +49,12 @@ module.exports = {
         preRequisite: "WKSHP-GIT101",
         replayAvailable: true,
         active: false,
-        videoUrl:
-          "https://hpe.sharepoint.com/teams/HPE_TSS_2020/Presentations%20%20Recordings/Forms/AllItems.aspx?id=%2Fteams%2FHPE%5FTSS%5F2020%2FPresentations%20%20Recordings%2FSoftware%20Defined%20%26%20Cloud%2FHACK%5FSHACK%5FHS7%2DGrommet%2Emp4&parent=%2Fteams%2FHPE%5FTSS%5F2020%2FPresentations%20%20Recordings%2FSoftware%20Defined%20%26%20Cloud",
         createdAt: new Date(),
         updatedAt: new Date()
       }
     ]);
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Workshops", null, {});
+    return queryInterface.bulkDelete("Challenges", null, {});
   }
 };

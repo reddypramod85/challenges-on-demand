@@ -57,7 +57,7 @@ const sendEmail = ({ recipient, subject, content }) =>
           }
         ],
         from: {
-          name: "HPE Workshops On Demand",
+          name: "HPE Discover HackShack Challenge",
           email: fromAddress
         },
         content: [

@@ -36,7 +36,7 @@ module.exports = ({
     ${
       userName && password
         ? `<p style="font-size: 20px; max-width: 720px; margin: 0 auto;">
-    Use below credentials to start the challenge
+    Please use the below credentials to start the challenge.
   </p><br>`
         : ""
     }

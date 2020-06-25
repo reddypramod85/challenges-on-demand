@@ -16,7 +16,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: "The container Challenge",
+        name: "The Container Challenge",
         notebook: "TheContainerChallenge",
         description:
           "This challenge is undoubtedly the most complicated one as it's an end-to-end developer experience. Your mission here will be to build a Grommet sample app (or reuse the one from the Grommet Challenge), package it in a container, and then run that container in a Kubernetes Cluster. This challenge touches on several technologies, such as front-end web application design, Docker containers and Kubernetes. Be ready for an intense moment when all the pieces of the puzzle will suddenly make total sense.",

@@ -38,16 +38,16 @@ const options = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
-      title: "HPE Workshops On Demand API",
+      title: "HPE Discover Hack Shack Challenges API",
       version: "1.0.0",
-      description: "HPE Workshops On Demand API documentation",
+      description: "HPE Discover Hack Shack Challenges API documentation",
       license: {
         name: "MIT",
         url: "https://choosealicense.com/licenses/mit/"
       },
       contact: {
         name: "HPEDEV",
-        url: "https://hpedev.io",
+        url: "https://hackshack.hpedev.io",
         email: fromEmailAddress
       }
     },

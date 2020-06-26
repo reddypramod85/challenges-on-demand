@@ -113,19 +113,29 @@ router.get("/customers/:id", (req, res) => {
 router.post("/customer", async (req, res) => {
   try {
     // check whether customer is already registered for another challenge
-    const count = await models.customer.count({
-      where: {
-        email: req.body.email
+    // const count = await models.customer.count({
+    //   where: {
+    //     email: req.body.email
+    //   }
+    // });
+    const exisitingCustomer = await models.customer.findAll({
+      where: { email: req.body.email }
+    });
+    let counter = 0;
+    exisitingCustomer.forEach(customer => {
+      const { dataValues } = customer;
+      const customerStatus = dataValues.active;
+      const lastemailsent = dataValues.lastEmailSent;
+      if (customerStatus || lastemailsent === null) {
+        counter = counter + 1;
       }
     });
-    console.log("count", count);
-    if (count >= 1) {
-      res
+    if (counter >= 1) {
+      return res
         .status(202)
         .send(
           "You can only register for one challenge at a time, please finish the current challenge and try again!"
         );
-      return;
     }
     // fetch the customer requested challenge from challenges table
     const challenge = await models.challenge.findOne({
@@ -143,8 +153,7 @@ router.post("/customer", async (req, res) => {
     // return error if student account is not available else assign it to the customer
     if (student === null) {
       console.log("Student Account Not Available!");
-      res.status(202).send("Registration full, try again tomorrow");
-      return;
+      return res.status(202).send("Registration full, try again tomorrow");
     } else {
       console.log("customer req", req.body);
       const dataValues = await models.customer.create({
@@ -163,13 +172,12 @@ router.post("/customer", async (req, res) => {
         });
         await challenge.decrement("capacity");
         //await dataValues.save();
-        res.status(200).send({});
+        return res.status(200).send({});
       }
     }
-    // }
   } catch (error) {
     console.log("error in catch!", error);
-    res.status(400).send({ error });
+    return res.status(400).send({ error });
   }
 });
 

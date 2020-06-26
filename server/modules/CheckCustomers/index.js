@@ -81,7 +81,7 @@ const checkCustomer = () => {
             recipient: dataValues.email,
             subject: "HPE Discover Hack Shack Challenge credentials",
             content: createEmailBody({
-              // heading: "Your HPE Discover HackShack Challenge credentials",
+              heading: "Your HPE Discover HackShack Challenge credentials",
               content: `Your HPE Discover Hack Shack Challenge credentials for the Hack Shack <b>${dataValues.challenge}</b> are provided below. Your access to the challenge will end in ${dataValues.hours} hours from now.</br> 
               <b>NOTE:</b> You may have to click Launch Server button once you log in to your Jupyter student account.</br>`,
               buttonLabel: "Start Challenge",

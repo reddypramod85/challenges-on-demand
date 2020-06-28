@@ -1,5 +1,5 @@
 {
-  "name": "workshops-on-demand",
+  "name": "challenges-on-demand",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,12 +20,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "docker:build": "docker build -t workshops_on_demand_client .",
-    "docker:clean": "docker rm -f workshops_on_demand_client || true",
-    "docker:run": "docker run -it -p 3000:3000 --name workshops_on_demand_client workshops_on_demand_client",
-    "docker:stop": "docker stop workshops_on_demand_client",
-    "docker:start": "docker start workshops_on_demand_client && yarn run docker:logs",
-    "docker:logs": "docker logs -f workshops_on_demand_client"
+    "docker:build": "docker build -t challenges_on_demand_client .",
+    "docker:clean": "docker rm -f challenges_on_demand_client || true",
+    "docker:run": "docker run -it -p 3000:3000 --name challenges_on_demand_client challenges_on_demand_client",
+    "docker:stop": "docker stop challenges_on_demand_client",
+    "docker:start": "docker start challenges_on_demand_client && yarn run docker:logs",
+    "docker:logs": "docker logs -f challenges_on_demand_client"
   },
   "eslintConfig": {
     "extends": "react-app"

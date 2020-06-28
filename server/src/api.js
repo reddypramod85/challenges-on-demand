@@ -1,4 +1,4 @@
-var cors = require("cors"),
+const cors = require("cors"),
   router = express.Router(),
   dotenv = require("dotenv");
 
@@ -10,16 +10,14 @@ import customerRoutes from "../routes/customers";
 import studentRoutes from "../routes/students";
 import challengeRoutes from "../routes/challenges";
 import runCronJobs from "../modules/CheckCustomers";
-const nodemailer = require("nodemailer");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
 dotenv.config();
 
 const fromEmailAddress = process.env.FROM_EMAIL_ADDRESS;
 const prodApiUrl = process.env.PRODUCTION_API_SERVER;
 const apiPort = process.env.API_PORT;
-
-const swaggerJsdoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
 
 const app = express();
 app.use(cors());
@@ -81,7 +79,7 @@ app.get("/swagger.json", function(req, res) {
 router.get("/", (req, res) => {
   console.log("inside base route");
   res.json({
-    hello: "HackShack Challenge"
+    hello: "HPE Discover Hack Shack Challenge"
   });
 });
 

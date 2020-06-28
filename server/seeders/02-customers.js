@@ -12,44 +12,44 @@ module.exports = {
       [
         {
           name: "Patrick",
-          email: "patrick.francois@hpe.com",
+          email: "patrick@hpe.com",
           company: "HPE",
-          // workshopList: ["RedFish API101", "HPE OneView API"],
           ...getDates(),
           challenge: "The Redfish Challenge",
+          notebook: "TheRedfishChallenge",
           hours: 4,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: "Fred",
-          email: "frederic.passeron@hpe.com",
+          email: "frederic@hpe.com",
           company: "HPE",
           ...getDates(),
           challenge: "The HPE OneView Challenge",
+          notebook: "TheOneViewChallenge",
           hours: 4,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: "Didier",
-          email: "didier.lalli@hpe.com",
+          email: "didier@hpe.com",
           company: "HPE",
           ...getDates(),
-          challenge: "The container Challenge",
+          challenge: "The Container Challenge",
+          notebook: "TheContainerChallenge",
           hours: 4,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: "pramod sareddy",
-          email: "pramod-reddy.sareddy@hpe.com",
+          email: "pramod@hpe.com",
           company: "HPE",
-          // workshopList: [
-          //   "Discover Grommet an HPE Open Source project to develop apps"
-          // ],
           ...getDates(),
           challenge: "The Grommet Challenge",
+          notebook: "TheGrommetChallenge",
           hours: 4,
           createdAt: new Date(),
           updatedAt: new Date()

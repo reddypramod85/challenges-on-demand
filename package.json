@@ -22,5 +22,6 @@
   "homepage": "https://github.com/reddypramod85/challenges-on-demand#readme",
   "devDependencies": {
     "concurrently": "^5.1.0"
-  }
+  },
+  "dependencies": {}
 }

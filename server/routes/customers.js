@@ -142,11 +142,37 @@ router.post("/customer", async (req, res) => {
       where: { name: req.body.challenge }
     });
 
+    let challengeName = req.body.challenge;
+    let studentRange = [0, 0];
+
+    // Matches for challenge name and assign student range:
+    switch (challengeName) {
+      case "The Container Challenge":
+        studentRange = [41, 60];
+        break;
+      case "The Redfish Challenge":
+        studentRange = [61, 99];
+        break;
+      case "The HPE OneView Challenge":
+        studentRange = [1, 40];
+        break;
+      case "The Grommet Challenge":
+        studentRange = [101, 150];
+        break;
+      default:
+        break;
+    }
+
+    console.log("student range", studentRange);
+
     // fetch the unassigned student account to assign to the requested customer
     const student = await models.student.findOne({
       where: {
         assigned: {
           [op.eq]: false
+        },
+        id: {
+          [op.between]: studentRange
         }
       }
     });

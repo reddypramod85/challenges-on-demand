@@ -45,7 +45,7 @@ module.exports = {
         notebook: "TheGrommetChallenge",
         description:
           "A new mission awaits! In this challenge, you will take on a UX designer persona and show your creative side using Grommet to design your own little web app UI. You will start with the Grommet Designer, generate code from your design, push that code to GitHub, and finally deploy the app on Netlify. Beginner through expert designers and developers are all welcome. This challenge is all about unleashing your creativity!",
-        capacity: 40,
+        capacity: 50,
         preRequisite: "WKSHP-GIT101",
         replayAvailable: true,
         active: false,

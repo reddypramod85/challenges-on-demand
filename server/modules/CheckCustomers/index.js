@@ -48,9 +48,9 @@ const checkCustomer = () => {
               console.log("send welcome email");
               sendEmail({
                 recipient: dataValues.email,
-                subject: "HPE Discover Hack Shack Challenge",
+                subject: "HPE Hack Shack Challenge",
                 content: createEmailBody({
-                  heading: "Welcome to HPE Discover Hack Shack Challenge!",
+                  heading: "Welcome to HPE Hack Shack Challenge!",
                   content: `Hi, ${dataValues.name}!</br>
                     Your request for the Hack Shack <b>${dataValues.challenge}</b> has been received. The HPE Dev team will send you the access details shortly in a separate email.</br>
                     <b>NOTE:</b> Your challenge access will expire ${dataValues.hours} hours after you receive your credentials.</br>
@@ -79,10 +79,10 @@ const checkCustomer = () => {
           console.log("send challenges credentials email");
           return sendEmail({
             recipient: dataValues.email,
-            subject: "HPE Discover Hack Shack Challenge credentials",
+            subject: "HPE Hack Shack Challenge credentials",
             content: createEmailBody({
-              heading: "Your HPE Discover HackShack Challenge credentials",
-              content: `Your HPE Discover Hack Shack Challenge credentials for the Hack Shack <b>${dataValues.challenge}</b> are provided below. Your access to the challenge will end in ${dataValues.hours} hours from now.</br> 
+              heading: "Your HPE HackShack Challenge credentials",
+              content: `Your HPE Hack Shack Challenge credentials for the Hack Shack <b>${dataValues.challenge}</b> are provided below. Your access to the challenge will end in ${dataValues.hours} hours from now.</br> 
               <b>NOTE:</b> You may have to click Launch Server button once you log in to your Jupyter student account.</br>`,
               buttonLabel: "Start Challenge",
               buttonUrl: dataValues.student.url,
@@ -111,10 +111,10 @@ const checkCustomer = () => {
           return sendEmail({
             recipient: dataValues.email,
             subject:
-              "Your HPE Discover Hack Shack Challenge session will end in one hour",
+              "Your HPE Hack Shack Challenge session will end in one hour",
             content: createEmailBody({
               heading:
-                "Your HPE Discover Hack Shack Challenge session will end in one hour",
+                "Your HPE Hack Shack Challenge session will end in one hour",
               content: `Please remember to save your work and download the challenge notebook if you anticipate requiring it in the future. 
               Your account will be erased after your session has ended.`,
               buttonLabel: "View Challenge",
@@ -139,10 +139,10 @@ const checkCustomer = () => {
           console.log("send expired email");
           return sendEmail({
             recipient: dataValues.email,
-            subject: "Your HPE Discover Hack Shack Challenge session has ended",
+            subject: "Your HPE Hack Shack Challenge session has ended",
             content: createEmailBody({
               heading:
-                "Thanks for participating in the HPE Discover Hack Shack Challenge!",
+                "Thanks for participating in the HPE Hack Shack Challenge!",
               content: `We hope you enjoyed <b>${dataValues.challenge}<b>.`,
               buttonLabel: "Click here to provide feedback",
               buttonUrl: feedback_url

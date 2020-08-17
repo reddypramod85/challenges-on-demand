@@ -21,7 +21,7 @@ module.exports = ({
     <div style="padding: 12px 0;">
       <img src="https://us-central1-grommet-designer.cloudfunctions.net/images/lozzi-hpe-com/developer-logo.png" style="display: inline-block; vertical-align: top;">
       <span style="display: inline-block; margin: 12px; font-size: 20px; font-weight: 700;">
-        HPE Discover Hack Shack Challenge
+        HPE Hack Shack Challenge
       </span>
     </div>
   </div>

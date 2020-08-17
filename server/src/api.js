@@ -36,9 +36,9 @@ const options = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
-      title: "HPE Discover Hack Shack Challenges API",
+      title: "HPE Hack Shack Challenges API",
       version: "1.0.0",
-      description: "HPE Discover Hack Shack Challenges API documentation",
+      description: "HPE Hack Shack Challenges API documentation",
       license: {
         name: "MIT",
         url: "https://choosealicense.com/licenses/mit/"
@@ -79,7 +79,7 @@ app.get("/swagger.json", function(req, res) {
 router.get("/", (req, res) => {
   console.log("inside base route");
   res.json({
-    hello: "HPE Discover Hack Shack Challenge"
+    hello: "HPE Hack Shack Challenge"
   });
 });
 
